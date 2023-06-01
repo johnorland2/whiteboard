@@ -2,6 +2,315 @@
 <html>
     <head>
     </head>
+    <noscript>
+        <h1>Some content was not displayed due to the browser configuration.</h1>
+    </noscript>
     <body>
+        <script>
+            
+            function main(){
+
+                let my_styles = document.createElement("style");
+                my_styles.id = "my-styles";
+                my_styles.innerHTML = `
+
+                    html, body {
+                        height: 100%;
+                        width: 100%;
+                    }
+
+                    html, body, div, span {
+                        margin: 0px;
+                        border: 0px;
+                        padding: 0px;
+                    }
+
+                    .container-main {
+                        box-sizing: border-box;
+                        padding: 25px;
+                        height: 100%;
+                        width: 100%;
+                    }
+
+                    .content-slice {
+                        width: 100%;
+                        box-sizing: border-box;
+                        padding: 5px;
+                    }
+
+                    .my-header {
+                        font-size: 44px;
+                        font-family: Tahoma;
+                    }
+
+                    .my-nametag {
+                        font-size: 22px;
+                        font-family: Tahoma;
+                        color: #404040;
+                    }
+
+                    .some-warning {
+                        font-family: Tahoma;
+                        font-size: 22px;
+                        color: red;
+                    }
+
+                    .some-answer {
+                        color: #a46a00;
+                    }
+
+
+                    .container-content {
+                        width: 500px;
+                        height: 500px;
+                        font-size: 15px;
+                        font-family: Tahoma;
+                        color: black;
+                        background-color: #ccc;
+                        border: 5px solid #202020;
+                        overflow-y: scroll;
+                    }
+
+                    .container-content {
+                        width: 500px;
+                        height: 500px;
+                        font-size: 15px;
+                        font-family: Tahoma;
+                        color: black;
+                        background-color: #ccc;
+                        border: 5px solid #202020;
+                    }
+
+                    .container-content-inner {
+                        width: 100%;
+                        height: 100%;
+                        
+                    }
+
+                `;
+
+                document.head.appendChild(my_styles);
+
+                let create_div = () => {
+                    return document.createElement("div");   
+                }
+
+                let container_main = create_div();
+                container_main.className = "container-main";
+                document.body.appendChild(container_main);
+
+                let container_header = create_div();
+                container_header.className = "content-slice my-header";
+                container_header.innerHTML = "Whiteboard Area:";
+                container_main.appendChild(container_header);
+
+                let container_nametag = create_div();
+                container_nametag.className = "content-slice my-nametag";
+                container_nametag.innerHTML = "Producer: John Orland";
+                container_main.appendChild(container_nametag);
+
+                let container_warning = create_div();
+                container_warning.className = "content-slice some-warning";
+                container_warning.innerHTML = `
+                    This area is a work in progress.
+                    It can be used for storing notes, URL shortcuts and other
+                    things.  User's discretion and caution is advised.
+                    Optional strategy for avoiding complications: don't use this
+                    webpage! 
+                `;
+                container_main.appendChild(container_warning);
+
+                let content_slice_content = create_div();
+                content_slice_content.className = "content-slice";
+                container_main.appendChild(content_slice_content);
+
+                let container_content = create_div();
+                container_content.className = "container-content";
+                content_slice_content.appendChild(container_content);
+
+                class Component {
+                    constructor(){
+                        return this;
+                    }
+
+                    setup(){
+                        throw "not implemented...";
+                    }
+
+                    teardown(){
+                        throw "not implemented...";
+                    }
+
+                    mount(elt_parent){
+                        if (this.is_setup &&
+                            !this.is_mounted) {
+                            this.element_parent = elt_parent;
+                            this.element_parent.appendChild(this.element_root);
+                            this.is_mounted = true;
+                            return this;
+                        } else {
+                            throw "something went wrong!";
+                        }
+                    }
+
+                    children(arr){
+                        if (Array.isArray(this.my_children)) {
+                            this.my_children.forEach((c) => {
+                                c.remove();
+                            });
+                        }
+                        this.my_children = arr;
+                        this.my_children.forEach((c) => {
+                            this.element_root.appendChild(c.element_root);
+                            c.element_parent = this.element_root;
+                        })
+                        return this;
+                    }
+
+                    is_complex = false;
+                    is_setup = false;
+                    is_mounted = false;
+                    element_root = null;
+                    element_parent = null;
+                    my_chilren = null;
+
+                }
+
+                class ComponentDiv extends Component {
+                    constructor(){
+                        super();
+                        this.is_complex = false;
+                    }
+                    setup(){
+                        this.element_root = document.createElement("div");
+                        this.is_setup = true;
+                        return this;
+                    }
+                    teardown(){
+                        this.element_root.remove();
+                        this.element_root = null;
+                        this.is_setup = false;
+                        return this;
+                    }
+                    text(str){
+                        this.element_root.innerHTML = str;
+                        return this;
+                    }
+                    class_name(str){
+                        this.element_root.className = str;
+                        return this;
+                    }
+                    id(str){
+                        this.element_root.id = str;
+                        return this;
+                    }
+                }
+
+                const _div = () => {
+                    return new ComponentDiv().setup();
+                }
+
+                class ComponentA extends Component {
+                    constructor(){
+                        super();
+                        this.is_complex = false;
+                    }
+                    setup(){
+                        this.element_root = document.createElement("a");
+                        this.is_setup = true;
+                        return this;
+                    }
+                    teardown(){
+                        this.element_root.remove();
+                        this.element_root = null;
+                        this.is_setup = false;
+                        return this;
+                    }
+                    text(str){
+                        this.element_root.innerHTML = str;
+                        return this;
+                    }
+                    class_name(str){
+                        this.element_root.className = str;
+                        return this;
+                    }
+                    id(str){
+                        this.element_root.id = str;
+                        return this;
+                    }
+                    href(str){
+                        this.element_root.href = str;
+                        return this;
+                    }
+                }
+
+                const _a = () => {
+                    return new ComponentA().setup();
+                }
+
+                let my_tree = _div().class_name("container-content-inner").children(
+                    [
+                        _div().class_name("content-slice").text("Hello!"),
+                        _div().class_name("content-slice").text("Photograph:"),
+                        _div().class_name("content-slice some-answer").text("TODO (note to self): add a portrait..."),
+                        _div().class_name("content-slice").text("Here are some shortcuts:"),
+                        _div().class_name("content-slice").children([
+                            _a().href("https://ubuntu.com/tutorials/command-line-for-beginners#9-conclusion").text("https://ubuntu.com/tutorials/command-line-for-beginners#9-conclusion"),
+                        ]),
+                        _div().class_name("content-slice").children([
+                            _a().href("http://linuxcommand.org/tlcl.php").text("http://linuxcommand.org/tlcl.php"),
+                        ]),
+                        _div().class_name("content-slice").children([
+                            _a().href("https://tldp.org/LDP/intro-linux/intro-linux.pdf").text("https://tldp.org/LDP/intro-linux/intro-linux.pdf"),
+                        ]),
+                        _div().class_name("content-slice").children([
+                            _a().href("https://manpages.ubuntu.com/manpages/focal/man1/intro.1.html").text("https://manpages.ubuntu.com/manpages/focal/man1/intro.1.html"),
+                        ]),
+                        _div().class_name("content-slice").children([
+                            _a().href("https://manpages.ubuntu.com/manpages/focal/man1/intro.1.html").text("https://manpages.ubuntu.com/manpages/focal/man1/intro.1.html"),
+                        ]),
+                        _div().class_name("content-slice").children([
+                            _a()
+                                .href("https://www.ecma-international.org/publications-and-standards/standards/ecma-262/")
+                                .text("https://www.ecma-international.org/publications-and-standards/standards/ecma-262/"),
+                        ]),
+                        _div().class_name("content-slice").children([
+                            _a()
+                                .href("https://developer.mozilla.org/en-US/docs/Web/HTTP")
+                                .text("https://developer.mozilla.org/en-US/docs/Web/HTTP"),
+                        ]),
+                        _div().class_name("content-slice some-answer").text("TODO (note to self): Option: add more shortcuts..."),
+                        _div().class_name("content-slice").text("Here are some notes:"),
+                        _div().class_name("content-slice").text("Question: What's some evidence that supports the existence of files, processes and other basic entities within Ubuntu and the typical user's eligibility to interact with these things?"),
+                        _div().class_name("content-slice some-answer").text("Arguably, the previous shortcuts lead to some evidence."),
+                        _div().class_name("content-slice some-answer").text("Some kind of internal/colocated/endogenous/primary resource might be more reliable than some books (a secondary source).  In general, primary sources are helpful in research and using the computer is like a research activity."),
+                        _div().class_name("content-slice some-answer").text("Resources that originate from manufacturers and organizers (e.g. Ubuntu and the Linux kernel developers respectively) seem to be adequate for some use cases.  Yet, organizers and content developers might sometimes be decentralized, and quality assurance might be less than what is superficially imagined.  Remember: some webpage results are like ephemeral content coming from some server; maybe, it's sometimes better to look for details that are well anchored and supplied in accordance to some kind of guarantee."),
+                        _div().class_name("content-slice some-answer").text("Beware that a manufacturer might modify some internal part of a product; some descriptive source might be out of date, incorrect, etc. in regards to the specifics for a particular product."),
+                        _div().class_name("content-slice some-answer").text("Maybe, a future option for obtaining documentation would involve a module/dependency system that is similar to (or works in conjunction with) NPM..."),
+                        _div().class_name("content-slice some-answer").text("I imagine that future systems for distribution of computer technology might involve more standardized testing and certifications (like getting a driver's license and/or taking standardized academic tests); along this progression, improvement and standardization of training resources might occur..."),
+                        _div().class_name("content-slice").text("Question: I struggled with following some of the GNU website's offerings, but my system still includes apparent GNU software... What should I do?"),
+                        _div().class_name("content-slice some-answer").text("TODO (note to self): further explore this topic.  Maybe, some inclusion of a GNU program on Ubuntu (for example) means that Canonical QA'd the program; so, I can sort of think of the program as being isolated from GNU as a whole.  It'd be interesting/useful to further analyze how these sorts of inclusions/testimonials/QA-events happen and see whether it happens in accordance with some rigorous/documented procedures and events..."),
+                        _div().class_name("content-slice some-answer").text("TODO (note to self): further explore this topic... maybe try Oracle Linux, Microsoft Windows and similar options... Yet, various partnerships and connections between suppliers and organizers might help someone to construe either Debian, Ubuntu or something else as a suitable option. "),
+                        _div().class_name("content-slice").text("Question: I am not an expert on all aspects of internet law, technical standards, computer engineering and similar fields.  How can I think about this more efficiently to reduce anxiousness and continue progressing in a positive direction?"),
+                        _div().class_name("content-slice some-answer").text("TODO (note to self): further explore this topic... - Idea: Although mainstream Linux distros might not include free copies of all technical standards and descriptions about all contexts and edge cases, some things seem to be true: I can keep using the products for academics and personal projects; These products are not necessarily fully bad/inappropriate because of the way that they are organized; etc...."),
+                        _div().class_name("content-slice some-answer").text("Some tools might not be liked universally but they can be used for an individual's projects... Taking a snapshot of the universal approval level and safety/compliance status for a particular thing might not be feasible... So, taking some risk and using some things might be fair (situationally).  Option: solve a problem if there is a fault instead of analyzing every imaginable detail in advance."),
+                        _div().class_name("content-slice some-answer").text("Yet, the internet is not necessarily a perfect medium/venue for all sharing... E.g. a young person might not need to create a globally accessible webpage.  Workarounds: reject some part of an audience via request filtering; run a website over a LAN or merely use a personal web-app offline..."),
+                        _div().class_name("content-slice").text("Question: I am not sure about how to compile a C program with a specific version of the 'glibc' dependency.  What should I do?"),
+                        _div().class_name("content-slice some-answer").text("TODO (note to self): further explore this topic... This seems like an advanced topic, and my readiness for C programming is perhaps less than what I previously understood it to be.  I should have asked for more help from teachers.  In the meantime, using Python and similar options might be more appropriate for me."),
+                        _div().class_name("content-slice some-answer").text("There is more to do in the world than C programming, and getting waylaid with technical details of C projects is probably not worth it (most of the time)... Alternatively, JavaScript, web browsers and similar technologies might be usable for academics, creative expression, profit, etc...."),
+                        _div().class_name("content-slice some-answer").text("Option: avoid writing any more C code unless I am enrolled in an advanced degree program and receiving coaching..."),
+                        _div().class_name("content-slice some-answer").text("TODO (note to self): Option: add more notes... "),
+
+                    ]
+                );
+                my_tree.mount(container_content);
+
+            }
+
+            window.addEventListener("load", () => {
+                main();
+            });
+
+        </script>
     </body>
 </html>
