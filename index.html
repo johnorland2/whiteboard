@@ -284,7 +284,7 @@
                         _div().class_name("content-slice some-answer").text("Beware that a manufacturer might modify some internal part of a product; some descriptive source might be out of date, incorrect, etc. in regards to the specifics for a particular product."),
                         _div().class_name("content-slice some-answer").text("Maybe, a future option for obtaining documentation would involve a module/dependency system that is similar to (or works in conjunction with) NPM..."),
                         _div().class_name("content-slice some-answer").text("I imagine that future systems for distribution of computer technology might involve more standardized testing and certifications (like getting a driver's license and/or taking standardized academic tests); along this progression, improvement and standardization of training resources might occur..."),
-                        _div().class_name("content-slice some-answer").text("Caveats: 1. If the device has some bug/malware/defect, an attempt to view a bundled resource might fail; so, having some resources in various places might help people to know about what to do in different situations... 2. Authors and suppliers might want to sell copies of textbooks; perhaps there are ways to rework this aspect..."),
+                        _div().class_name("content-slice some-answer").text("Some caveats: 1. If the device has some bug/malware/defect, an attempt to view a bundled resource might fail; so, having some resources in various places might help people to know about what to do in different situations... 2. Authors and suppliers might want to sell copies of textbooks; perhaps there are ways to rework this aspect...; TODO: add more caveats..."),
                         _div().class_name("content-slice").text("Question: I struggled with following some of the GNU website's offerings, but my system still includes apparent GNU software... What should I do?"),
                         _div().class_name("content-slice some-answer").text("TODO (note to self): further explore this topic.  Maybe, some inclusion of a GNU program on Ubuntu (for example) means that Canonical QA'd the program; so, I can sort of think of the program as being isolated from GNU as a whole.  It'd be interesting/useful to further analyze how these sorts of inclusions/testimonials/QA-events happen and see whether it happens in accordance with some rigorous/documented procedures and events..."),
                         _div().class_name("content-slice").text("Question: I imagined that using a domestic operating system product might lead to fewer errors, conflicts, etc. over the long run.  What should I do?"),
@@ -298,7 +298,13 @@
                         _div().class_name("content-slice some-answer").text("There is more to do in the world than C programming, and getting waylaid with technical details of C projects is probably not worth it (most of the time)... Alternatively, JavaScript, web browsers and similar technologies might be usable for academics, creative expression, profit, etc...."),
                         _div().class_name("content-slice some-answer").text("Option: avoid writing any more C code unless I am enrolled in an advanced degree program and receiving coaching..."),
                         _div().class_name("content-slice some-answer").text("TODO (note to self): Option: add more notes... "),
-
+                        _div().class_name("content-slice").text("Question: I experienced some concern about inadvertently sending too many newlines into the stdin (approving too many commands at once or something via inadvertently holding down the \'return\' key for too long or some program unexpectedly showing another prompt)... What is a solution to this problem?"),
+                        _div().class_name("content-slice some-answer").text("The following resource might help (apparent instructions relating to disabling autorepeat behavior for a particular keyboard key):"),
+                        _div().class_name("content-slice").children([
+                            _a()
+                                .href("https://manpages.ubuntu.com/manpages/focal/man1/xset.1.html")
+                                .text("https://manpages.ubuntu.com/manpages/focal/man1/xset.1.html"),
+                        ]),
                     ]
                 );
                 my_tree.mount(container_content);
