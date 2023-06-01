@@ -148,6 +148,7 @@
                         }
                         this.my_children = arr;
                         this.my_children.forEach((c) => {
+                            if (!c.is_setup) throw("child is not ready");
                             this.element_root.appendChild(c.element_root);
                             c.element_parent = this.element_root;
                         })
