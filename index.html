@@ -143,7 +143,7 @@
                     children(arr){
                         if (Array.isArray(this.my_children)) {
                             this.my_children.forEach((c) => {
-                                c.remove();
+                                c.teardown();
                             });
                         }
                         this.my_children = arr;
