@@ -110,7 +110,7 @@
                 container_warning.innerHTML = `
                     This area is a work in progress.
                     It can be used for storing notes, URL shortcuts and other
-                    things.  User's discretion and caution is advised.
+                    things.  User's discretion and caution are advised.
                     Optional strategy for avoiding complications: don't use this
                     webpage! 
                 `;
@@ -176,6 +176,7 @@
                     constructor(){
                         super();
                         this.is_complex = false;
+                        return this;
                     }
                     setup(){
                         this.element_root = document.createElement("div");
@@ -210,6 +211,7 @@
                     constructor(){
                         super();
                         this.is_complex = false;
+                        return this;
                     }
                     setup(){
                         this.element_root = document.createElement("a");
@@ -285,7 +287,7 @@
                         _div().class_name("content-slice some-answer").text("TODO (note to self): further explore this topic.  Maybe, some inclusion of a GNU program on Ubuntu (for example) means that Canonical QA'd the program; so, I can sort of think of the program as being isolated from GNU as a whole.  It'd be interesting/useful to further analyze how these sorts of inclusions/testimonials/QA-events happen and see whether it happens in accordance with some rigorous/documented procedures and events..."),
                         _div().class_name("content-slice").text("Question: I imagined that using a domestic operating system product might lead to fewer errors, conflicts, etc. over the long run.  What should I do?"),
                         _div().class_name("content-slice some-answer").text("TODO (note to self): further explore this topic... maybe try Oracle Linux, Microsoft Windows and similar options... Yet, various partnerships and connections between suppliers and organizers might help someone to construe either Debian, Ubuntu or something else as a suitable option. "),
-                        _div().class_name("content-slice").text("Question: I am not an expert on all aspects of internet law, technical standards, computer engineering and similar fields.  How can I think about this more efficiently to reduce anxiousness and continue progressing in a positive direction?"),
+                        _div().class_name("content-slice").text("Question: I am not an expert on all aspects of internet law, technical standards, computer engineering and similar fields.  How can I keep up my involvement/learning efficiently, reduce anxiousness, continue progressing in a positive direction, etc.?"),
                         _div().class_name("content-slice some-answer").text("TODO (note to self): further explore this topic... - Idea: Although mainstream Linux distros might not include free copies of all technical standards and descriptions about all contexts and edge cases, some things seem to be true: I can keep using the products for academics and personal projects; These products are not necessarily fully bad/inappropriate because of the way that they are organized; etc...."),
                         _div().class_name("content-slice some-answer").text("Some tools might not be liked universally but they can be used for an individual's projects... Taking a snapshot of the universal approval level and safety/compliance status for a particular thing might not be feasible... So, taking some risk and using some things might be fair (situationally).  Option: solve a problem if there is a fault instead of analyzing every imaginable detail in advance."),
                         _div().class_name("content-slice some-answer").text("Yet, the internet is not necessarily a perfect medium/venue for all sharing... E.g. a young person might not need to create a globally accessible webpage.  Workarounds: reject some part of an audience via request filtering; run a website over a LAN or merely use a personal web-app offline..."),
